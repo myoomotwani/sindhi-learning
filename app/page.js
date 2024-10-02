@@ -15,7 +15,7 @@ export default function Home() {
         </div>
         <Image src={"/banner.png"} alt="banner" height={100} width={200} className="w-screen h-[40vh]" unoptimized />
       </div>
-      <div className="flex items-start justify-center w-[85%] space-x-10">
+      <div className="flex items-start justify-center w-[90%] space-x-10">
         <div className="drop-shadow-2xl flex flex-col p-5 shadow-xl rounded-lg w-[70%]">
           <span className="font-semibold pb-4">ilm ji jaanch(علم جي جانچ)</span>
           <div className="grid grid-cols-2 gap-3 text-[#112B5E] font-semibold">
