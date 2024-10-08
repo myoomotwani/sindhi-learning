@@ -47,7 +47,7 @@ const CustomAudioPlayer = ({ src }) => {
   };
 
   return (
-    <div className="flex items-center space-x-4 px-4 py-1 rounded-3xl bg-[#222222] text-white w-full max-w-xl">
+    <div className="flex items-center space-x-3 px-2 py-1 rounded-3xl bg-[#222222] text-white w-full max-w-xl">
       {/* Play/Pause Button */}
       <button
         className="text-xl rounded-full focus:outline-none"
