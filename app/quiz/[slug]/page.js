@@ -47,8 +47,11 @@ export default function Page({ params }) {
       </div>
       {showScore ? 
       <div className='flex flex-col space-y-3 items-center justify-center'>
-        <Image src={"/bulb.png"} alt='bulb' width={100} height={100} unoptimized />
-        <span className='text-[#FF7C1A] font-semibold text-3xl'>Your score is</span>
+        <div className='flex flex-col items-center justify-center -space-y-16'>
+          <Image src={"/bulb2.png"} alt='bulb' width={100} height={100} unoptimized />
+          <span>{score}/{quizData[slug].length}</span>
+        </div>
+        <span className='text-[#FF7C1A] font-semibold text-3xl pt-5'>Your score is</span>
         <span className='text-xl font-semibold'>{score} out of {quizData[slug].length}</span>
       </div>
       :

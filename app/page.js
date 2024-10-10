@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <Image src={backgroundSrc} alt="banner" height={100} width={200} className="w-screen md:h-[40vh]" unoptimized />
       </div>
-      <div className="flex flex-col items-center lg:flex-row md:items-start justify-center w-[90%] space-y-5 lg:space-y-0 lg:space-x-10">
+      <div className="flex flex-col items-center lg:flex-row md:items-center lg:items-start justify-center w-[90%] space-y-5 lg:space-y-0 lg:space-x-10">
         <div className="drop-shadow-2xl w-full flex flex-col p-5 shadow-xl rounded-lg lg:w-[60%] xl:w-[70%]">
           <span className="font-semibold pb-4">ilm ji jaanch(علم جي جانچ)</span>
           <div className="grid grid-cols-2 gap-5 text-[#112B5E] font-semibold text-sm sm:text-base">
@@ -62,7 +62,7 @@ export default function Home() {
             <Link href={"/quiz/4"} className="rounded-lg shadow-lg drop-shadow-lg p-2 px-4 md:px-10 hover:text-white hover:bg-[#112B5E]">4) Jaanch 4</Link>
           </div>
         </div>
-        <div className="flex flex-col space-y-3 shadow-xl drop-shadow-2xl rounded-lg py-5 w-full lg:w-[40%] xl:w-[30%]">
+        <div className="flex flex-col space-y-3 shadow-xl drop-shadow-2xl rounded-lg py-5 w-[92%] lg:w-[40%] xl:w-[30%]">
           <div className="flex flex-col justify-center border-b border-[#D2D2D2] px-5 pb-2 space-y-2">
             <div className="flex space-x-3 items-start justify-start">
               <Image src={"/icon1.png"} alt="icon" height={10} width={20} unoptimized />
@@ -80,37 +80,16 @@ export default function Home() {
                 <span>Following is the Audio of Dairla B.</span>
               </div>
             </div>
-            <div className="w-full pl-5 pr-3">
-              <CustomAudioPlayer src={quizData[1][0].audio} />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3 items-start justify-center border-b border-[#D2D2D2] pb-4">
-            <div className="flex space-x-3 items-center justify-center px-5">
-              <div className="bg-[#FD8469] rounded-xl p-3 py-4">
-                <Image src={"/quotationMark.png"} alt="icon" width={30} height={30} unoptimized />
-              </div>
-              <div className="flex flex-col items-start justify-center">
-                <span className="font-semibold">Eidan P.</span>
-                <span>Following is the Audio of Eidan P.</span>
-              </div>
-            </div>
             <div className="w-full pl-5 pr-3 flex flex-col space-y-2">
-              <CustomAudioPlayer src={"/audios/Recording.mp3"} />
-              <CustomAudioPlayer src={"/audios/Recording.mp3"} />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3 items-start justify-center">
-            <div className="flex space-x-3 items-center justify-center px-5">
-              <div className="bg-[#FD8469] rounded-xl p-3 py-4">
-                <Image src={"/quotationMark.png"} alt="icon" width={30} height={30} unoptimized />
-              </div>
-              <div className="flex flex-col items-start justify-center">
-                <span className="font-semibold">Dairla B.</span>
-                <span>Following is the Audio of Dairla B.</span>
-              </div>
-            </div>
-            <div className="w-full pl-5 pr-3">
-              <CustomAudioPlayer src={"/audios/Recording.mp3"} />
+              <CustomAudioPlayer src={"/audios/sop/1.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/2.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/3.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/4.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/5.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/6.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/7.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/8.ogg"} />
+              <CustomAudioPlayer src={"/audios/sop/9.ogg"} />
             </div>
           </div>
         </div>
