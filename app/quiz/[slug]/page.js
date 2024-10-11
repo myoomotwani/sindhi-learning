@@ -3,9 +3,12 @@ import CustomAudioPlayer from '@/components/CustomAudioPlayer';
 import Navbar from '@/components/Navbar';
 import { quizData } from '@/utils/quizData';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import { useRouter, usePathname } from 'next/navigation';
+import React, { useState, useEffect } from 'react'
 
 export default function Page({ params }) {
+    const router = useRouter();
+    const pathname = usePathname();
     const slug = params.slug
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selected, setSelected] = useState("")
@@ -13,17 +16,49 @@ export default function Page({ params }) {
     const [submitted, setSubmitted] = useState(false);
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
+    const [hasShownAlert, setHasShownAlert] = useState(false);
+
+    useEffect(() => {
+      console.log('useEffect hook triggered'); // Check if useEffect is executed
+  
+      const handleBeforeUnload = (event) => {
+        console.log('handleBeforeUnload triggered'); // Check if event listener is called
+  
+        if (!hasShownAlert) {
+          console.log('event object:', event); // Inspect the event object
+  
+          event.preventDefault();
+          event.returnValue = '';
+          alert('Are you sure you want to leave?');
+          setHasShownAlert(true);
+        }
+      };
+  
+      window.addEventListener('beforeunload', handleBeforeUnload);
+  
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);   
+  
+      };
+    }, [hasShownAlert, pathname, router]);
 
     const handleCheckAnswer = () => {
       setSubmitted(true);
       if (selected === quizData[slug][currentQuestion].choices[quizData[slug][currentQuestion].correctAnswer]) {
         setCorrect(true);
         setScore(score + 1)
+        playAudio("/audios/success.mp3")
       }
       else {
         setCorrect(false);
+        playAudio("/audios/failure.mp3")
       }
     }
+
+    const playAudio = (audioSrc) => {
+      const audio = new Audio(audioSrc);
+      audio.play();
+    };
 
     const handleContinue = () => {
       if (quizData[slug].length - 1 === currentQuestion) {

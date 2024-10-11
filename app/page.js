@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [backgroundSrc, setBackgroundSrc] = useState("/banner.png");
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const updateBackgroundImage = () => {
@@ -83,6 +84,9 @@ export default function Home() {
             <div className="w-full pl-5 pr-3 flex flex-col space-y-2">
               <CustomAudioPlayer src={"/audios/sop/1.ogg"} />
               <CustomAudioPlayer src={"/audios/sop/2.ogg"} />
+              {!showMore && <button onClick={() => {setShowMore(true)}}>Show more</button>}
+              {showMore && 
+              <div className="w-full flex flex-col space-y-2">
               <CustomAudioPlayer src={"/audios/sop/3.ogg"} />
               <CustomAudioPlayer src={"/audios/sop/4.ogg"} />
               <CustomAudioPlayer src={"/audios/sop/5.ogg"} />
@@ -90,6 +94,8 @@ export default function Home() {
               <CustomAudioPlayer src={"/audios/sop/7.ogg"} />
               <CustomAudioPlayer src={"/audios/sop/8.ogg"} />
               <CustomAudioPlayer src={"/audios/sop/9.ogg"} />
+              </div>}
+              {showMore && <button onClick={() => {setShowMore(false)}}>Show less</button>}
             </div>
           </div>
         </div>
