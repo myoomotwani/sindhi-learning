@@ -3,11 +3,10 @@ import CustomAudioPlayer from '@/components/CustomAudioPlayer';
 import Navbar from '@/components/Navbar';
 import { quizData } from '@/utils/quizData';
 import Image from 'next/image';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react'
 
 export default function Page({ params }) {
-    const router = useRouter();
     const pathname = usePathname();
     const slug = params.slug
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -17,30 +16,44 @@ export default function Page({ params }) {
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [hasShownAlert, setHasShownAlert] = useState(false);
+    const [userProgress, setUserProgress] = useState({
+      "score": 0,
+      "completed": false,
+      "question": 0,
+    })
 
     useEffect(() => {
-      console.log('useEffect hook triggered'); // Check if useEffect is executed
-  
+      const storedUserProgress = localStorage.getItem(`userProgress${slug}`)
+
+      if (storedUserProgress) {
+        let progress = JSON.parse(storedUserProgress)
+        setUserProgress(progress)
+        console.log(progress)
+        if (progress.completed) {
+          setScore(progress.score)
+          setShowScore(true);
+        }
+        else {
+          setCurrentQuestion(progress.question)
+          setScore(progress.score)
+        }
+      }
+    }, [slug, pathname])
+
+    useEffect(() => {
       const handleBeforeUnload = (event) => {
-        console.log('handleBeforeUnload triggered'); // Check if event listener is called
-  
         if (!hasShownAlert) {
-          console.log('event object:', event); // Inspect the event object
-  
           event.preventDefault();
           event.returnValue = '';
           alert('Are you sure you want to leave?');
           setHasShownAlert(true);
         }
       };
-  
       window.addEventListener('beforeunload', handleBeforeUnload);
-  
       return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);   
-  
+        window.removeEventListener('beforeunload', handleBeforeUnload); 
       };
-    }, [hasShownAlert, pathname, router]);
+    }, [hasShownAlert, pathname]);
 
     const handleCheckAnswer = () => {
       setSubmitted(true);
@@ -48,10 +61,22 @@ export default function Page({ params }) {
         setCorrect(true);
         setScore(score + 1)
         playAudio("/audios/success.mp3")
+        setUserProgress(prevState => ({
+          ...prevState,
+          score: score + 1,
+          question: currentQuestion + 1
+        }))
+        // localStorage.setItem(`userProgress${slug}`, JSON.stringify(userProgress))
       }
       else {
         setCorrect(false);
         playAudio("/audios/failure.mp3")
+        setUserProgress(prevState => ({
+          ...prevState,
+          score: score,
+          question: currentQuestion + 1
+        }))
+        // localStorage.setItem(`userProgress${slug}`, JSON.stringify(userProgress))
       }
     }
 
@@ -63,12 +88,20 @@ export default function Page({ params }) {
     const handleContinue = () => {
       if (quizData[slug].length - 1 === currentQuestion) {
         setShowScore(true);
+        setUserProgress(prevState => ({
+          ...prevState,
+          score: score,
+          completed: true,
+          question: currentQuestion + 1
+        }))
+        localStorage.setItem(`userProgress${slug}`, JSON.stringify({"score": score, "completed": true, "question": currentQuestion}))
       }
       else {
         setSubmitted(false);
         setCurrentQuestion(currentQuestion + 1)
         setCorrect(false)
         setSelected("")
+        localStorage.setItem(`userProgress${slug}`, JSON.stringify(userProgress))
       }
     }
 
