@@ -77,8 +77,8 @@ export default function Home() {
                 <Image src={"/quotationMark.png"} alt="icon" width={30} height={30} unoptimized />
               </div>
               <div className="flex flex-col items-start justify-center">
-                <span className="font-semibold">Dairla B.</span>
-                <span>Following is the Audio of Dairla B.</span>
+                <span className="font-semibold">Yatharth</span>
+                <span>Following is the Audio of Yatharth</span>
               </div>
             </div>
             <div className="w-full pl-5 pr-3 flex flex-col space-y-2">
